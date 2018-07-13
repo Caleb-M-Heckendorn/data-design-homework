@@ -1,0 +1,16 @@
+.image{
+	height: 100px;
+	width: auto;
+	display: inline-block;
+	position: center;
+	top: 50px;
+	left: 20px;
+}
+
+.foe{
+	font-size: 30px;
+}
+
+body{
+	background-color: silver;
+}
