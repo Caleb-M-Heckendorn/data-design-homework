@@ -19,9 +19,6 @@
 			<li>Clint reads about his personality and decides to send his results to his email</li>
 			<li>Website sends results</li>
 			<li>Clint closes browser</li>
-			<h4>Relationships</h4>
-			<li>One profile can share multiple personalities: 1-to-n</li>
-			<li>Multiple profiles can share multiple personalities: m-to-n</li>
 		</ul>
 		<a href="./index.php" alt="link back to index.php">Back</a>
 	</body>
