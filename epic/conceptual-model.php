@@ -21,7 +21,7 @@
 				<li>profilePersonalityPersonalityId (FK)</li>
 				<li>profilePersonalityProfileId (FK)</li>
 			<h3>Relationships</h3>
-			<li>One profile can share multiple personalities: 1-to-n</li>
+			<li>One profile can have one Personality: 1-to-n</li>
 			<li>Multiple profiles can share multiple personalities: m-to-n</li>
 			</ul>
 		<img src="image/erd.svg" alt="">
