@@ -25,6 +25,7 @@
 			<li>Multiple profiles can share multiple personalities: m-to-n</li>
 			</ul>
 		<img src="image/erd.svg" alt="">
+		<br>
 		<a href="./index.php" alt="link to index.php">Back</a>
 	</body>
 </html>
