@@ -15,6 +15,7 @@
 				<li>personalityName</li>
 			<h3>Profile</h3>
 				<li>profileId (PK)</li>
+				<li>personalityProfileId</li>
 				<li>profileName</li>
 				<li>profileEmail</li>
 			<h3>ProfilePersonality</h3>
