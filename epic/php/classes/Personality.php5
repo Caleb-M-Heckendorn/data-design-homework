@@ -8,12 +8,6 @@
 /**
  * @author Caleb Heckendorn <checkendorn@cnm.edu>
  * @version 1.0
-
-
-
-
-
-
  */
 class Personality {
 	/**
