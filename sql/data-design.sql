@@ -17,6 +17,7 @@ CREATE TABLE profile (
 	profileName VARCHAR(30) NOT NULL,
 	profileEmail VARCHAR(100) NOT NULL,
 	UNIQUE(profileEmail),
+	UNIQUE(profileName),
 	PRIMARY KEY(profileId)
 );
 

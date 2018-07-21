@@ -28,6 +28,16 @@ class Profile {
 	 */
 	private $profileEmail;
 
+	/**
+	 * Profile constructor.
+	 * @param string|Uuid $newProfileId id of profile or null if new profile
+	 * @param string $newProfileName string containing na me
+	 * @param string $newProfileEmail string containing email
+	 * @throws \InvalidArgumentException if data types are not valid
+	 * @throws \RangeException if data values are out of bounds
+	 * @throws \TypeError if a data type violates a data hint
+	 * @throws \Exception if some other exception occurs
+	 */
 
 	public function  __construct($newProfileId, string $newProfileName, string $newProfileEmail) {
 		try {
