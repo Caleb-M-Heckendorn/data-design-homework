@@ -131,4 +131,99 @@ class Profile {
 		$this->profileEmail = $uuid;
 	}
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	/*
+		 * inserts this profile id into mySQL
+		 *
+		 * @param \PDO $pdo PDO connection object
+		 * @throws \PDOException when mySQL errors happen
+		 * @throws \TypeError if $pdo is not a PDO connection object
+		 */
+	public function insert (\PDO $pdo): void {
+		//create query template
+		$query = "INSERT INTO profile(profileId, profileEmail, profileName) VALUES (:profileId, :profileEmail, :profileName)";
+		$statement = $pdo->prepare($query);
+		$parameters = ["profileId" => $this->profileId->getBytes(), "profileEmail" => $this->profileEmail, "profileName" => $this->profileName];
+		$statement->execute($parameters);
+	}
+	/*
+	 * delete the profile id from mySQL
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 * @throws \PDOException
+	 * @throws \TypeError if $pdo is not a PDO Connection Object
+	 */
+	public function delete(\PDO $pdo): void {
+		//create query template
+		$query = "DELETE FROM profile WHERE profileId = :profileId";
+		$statement = $pdo->prepare($query);
+		//bind the member variables to the place holders in the template
+		$parameters = ["profileId" => $this->profileId->getBytes()];
+		$statement->execute($parameters);
+	}
+	/**
+	 * updates the Profile from mySQL
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 * @throws \PDOException when mySQL errors happen
+	 */
+	public function update(\PDO $pdo): void {
+		//create query template
+		$query = "UPDATE profile SET profileEmail = :profileEmail, profileName = :profileName";
+		$statement = $pdo->prepare($query);
+		//bind the member variables to the place holders in the template
+		$parameters = ["profileId" => $this->profileId->getBytes(), "profileEmail" => $this->profileEmail, "profileName" => $this->profileName];
+		$statement->execute($parameters);
+	}
+	/*
+	 * gets the Profile by profile id
+	 *
+	 * @param \PDO $pdo $pdo PDO connection object
+	 * @param string $profileId profile id to search for
+	 * @return Profile|null Profile or null if not found
+	 * @throws \PDOException when mySQL errors happen
+	 * @throws \TypeError when a variable is not the correct data type
+	 */
+	public static function getProfileByProfileId(\PDO $pdo, string $profileId):?Profile {
+		//sanitize the profile id before searching
+		try {
+			$profileId =self::validateUuid($profileId);
+		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
+			throw (new \PDOException($exception->getMessage(), 0, $exception));
+		}
+		//create query template
+		$query = "SELECT profileId, profileEmail, profileName FROM profile WHERE profileId = :profileId";
+		$statement = $pdo->prepare($query);
+		//bind the profile id to the placeholder in the template
+		$parameters = ["profileId" => $profileId->getBytes()];
+		$statement->execute($parameters);
+		//grab the Profile from mySQL
+		try {
+			$profile = null;
+			$statement->setFetchMode(\PDO::FETCH_ASSOC);
+			$row = $statement->fetch();
+			if($row !== false) {
+				$profile = new Profile($row["profileId"], $row["profileEmail"], $row["profileName"]);
+			}
+		} catch(\Exception $exception) {
+			//if the row couldn't be converted, rethrow it
+			throw(new \PDOException($exception->getMessage(), 0, $exception));
+		}
+		return ($profile);
+	}
+
+
 }

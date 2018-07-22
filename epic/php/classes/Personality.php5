@@ -210,7 +210,7 @@ class Personality {
 			//create query template
 			$query = "SELECT personalityId, personalityDescription, personalityName, personalityType FROM personality WHERE personalityId = :personalityId";
 			$statement = $pdo->prepare($query);
-			//bind the song id to the placeholder in the template
+			//bind the personality id to the placeholder in the template
 			$parameters = ["personalityId" => $personalityId->getBytes()];
 			$statement->execute($parameters);
 			//grab the Personality from mySQL
@@ -223,7 +223,7 @@ class Personality {
 				}
 			} catch(\Exception $exception) {
 				//if the row couldn't be converted, rethrow it
-				throw(new \PDOException($exception->getMessage(), 0, $exception));
+				throw(new \PDOException($exception->getMessage(),0, $exception));
 			}
 			return ($personality);
 		}
