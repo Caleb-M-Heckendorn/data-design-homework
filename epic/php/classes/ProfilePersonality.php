@@ -91,15 +91,6 @@ class ProfilePersonality {
 		$this->profilePersonalityProfileId = $uuid;
 	}
 
-
-
-
-
-
-
-
-
-
 	/*
 		 * inserts this personality id into mySQL
 		 *
@@ -162,7 +153,7 @@ class ProfilePersonality {
 			$statement->setFetchMode(\PDO::FETCH_ASSOC);
 			$row = $statement->fetch();
 			if($row !== false) {
-				$profilePersonalityPersonalityId = new ProfilePersonality($row["profilePersonalityPersonalityId"], $row["profilePersonalityProfileId"]);
+				$profilePersonality = new profilePersonality($row["profilePersonalityPersonalityId"], $row["profilePersonalityProfileId"]);
 			}
 		} catch(\Exception $exception) {
 			//if the row couldn't be converted, rethrow it
