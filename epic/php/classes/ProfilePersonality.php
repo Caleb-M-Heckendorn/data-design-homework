@@ -109,13 +109,13 @@ class ProfilePersonality {
 		 */
 	public function insert (\PDO $pdo): void {
 		//create query template
-		$query = "INSERT INTO profilePersonality(profilePersonalityPersonalityId) VALUES (:profilePersonalityPersonalityId)";
+		$query = "INSERT INTO profilePersonality(profilePersonalityPersonalityId, profilePersonalityProfileId) VALUES (:profilePersonalityPersonalityId, :profilePersonalityProfileId)";
 		$statement = $pdo->prepare($query);
-		$parameters = ["profilePersonalityPersonalityId" => $this->profilePersonalityProfileId->getBytes()];
+		$parameters = ["profilePersonalityPersonalityId" => $this->profilePersonalityPersonalityId->getBytes(), "profilePersonalityProfileId" => $this->profilePersonalityProfileId->getBytes()];
 		$statement->execute($parameters);
 	}
 	/*
-	 * delete the profile personality id from mySQL
+	 * delete the profile personality personality id from mySQL
 	 *
 	 * @param \PDO $pdo PDO connection object
 	 * @throws \PDOException
@@ -123,28 +123,14 @@ class ProfilePersonality {
 	 */
 	public function delete(\PDO $pdo): void {
 		//create query template
-		$query = "DELETE FROM profilePersonality WHERE profilePersonalityPersonalityId = :profilePersonalityPersonalityId";
-		$statement = $pdo->prepare($query);
-		//bind the member variables to the place holders in the template
-		$parameters = ["profilePersonalityPersonalityId" => $this->profilePersonalityPersonalityId->getBytes()];
-		$statement->execute($parameters);
-	}
-	/**
-	 * updates the ProfilePersonality from mySQL
-	 *
-	 * @param \PDO $pdo PDO connection object
-	 * @throws \PDOException when mySQL errors happen
-	 */
-	public function update(\PDO $pdo): void {
-		//create query template
-		$query = "UPDATE profilePersonality SET personalityDescription = :personalityDescription, personalityName = :personalityName, personalityType = :personalityType";
+		$query = "DELETE FROM profilePersonality WHERE profilePersonalityPersonalityId = :profilePersonalityPersonalityId AND profilePersonalityProfileId = :profilePersonalityProfileId";
 		$statement = $pdo->prepare($query);
 		//bind the member variables to the place holders in the template
 		$parameters = ["profilePersonalityPersonalityId" => $this->profilePersonalityPersonalityId->getBytes()];
 		$statement->execute($parameters);
 	}
 	/*
-	 * gets the ProfilePersonality by profile personality personality id
+	 * gets the ProfilePersonality by profile personality
 	 *
 	 * @param \PDO $pdo $pdo PDO connection object
 	 * @param string $profileId profile id to search for
@@ -152,22 +138,27 @@ class ProfilePersonality {
 	 * @throws \PDOException when mySQL errors happen
 	 * @throws \TypeError when a variable is not the correct data type
 	 */
-	public static function getProfilePersonalityByProfilePersonalityPersonalityId(\PDO $pdo, string $profilePersonalityPersonalityId):?ProfilePersonality {
+	public static function getProfilePersonalityByProfilePersonalityPersonalityIdAndProfilePersonalityProfileId(\PDO $pdo, string $profilePersonalityPersonalityId, string $profilePersonalityProfileId):?ProfilePersonality {
 		//sanitize the profile personality personality id before searching
 		try {
-			$profilePersonalityPersonalityId =self::validateUuid($profilePersonalityPersonalityId);
+			$profilePersonalityPersonalityId = self::validateUuid($profilePersonalityPersonalityId);
+		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
+			throw (new \PDOException($exception->getMessage(), 0, $exception));
+		}
+		try {
+			$profilePersonalityProfileId = self::validateUuid($profilePersonalityProfileId);
 		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
 			throw (new \PDOException($exception->getMessage(), 0, $exception));
 		}
 		//create query template
-		$query = "SELECT profilePersonalityPersonalityId FROM profilePersonality WHERE profilePersonalityPersonalityId = :profilePersonalityPersonalityId";
+		$query = "SELECT profilePersonalityPersonalityId, profilePersonalityProfileId FROM profilePersonality WHERE profilePersonalityPersonalityId = :profilePersonalityPersonalityId AND profilePersonalityProfileId = :profilePersonalityProfileId";
 		$statement = $pdo->prepare($query);
-		//bind the profile personality personality id to the placeholder in the template
-		$parameters = ["profilePersonalityPersonalityId" => $profilePersonalityPersonalityId->getBytes()];
+		//bind the profile personality personality id and the profile personality profile id to the placeholder in the template
+		$parameters = ["profilePersonalityPersonalityId" => $profilePersonalityPersonalityId->getBytes(), "profilePersonalityProfileId" => $profilePersonalityProfileId->getBytes()];
 		$statement->execute($parameters);
 		//grab the ProfilePersonality from mySQL
 		try {
-			$profilePersonalityPersonalityId = null;
+			$profilePersonality = null;
 			$statement->setFetchMode(\PDO::FETCH_ASSOC);
 			$row = $statement->fetch();
 			if($row !== false) {
@@ -177,6 +168,6 @@ class ProfilePersonality {
 			//if the row couldn't be converted, rethrow it
 			throw(new \PDOException($exception->getMessage(), 0, $exception));
 		}
-		return ($profilePersonalityPersonalityId);
+		return ($profilePersonality);
 	}
 }
