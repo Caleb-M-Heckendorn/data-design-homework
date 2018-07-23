@@ -10,11 +10,6 @@ use Ramsey\Uuid\Uuid;
  * @version 1.0
  */
 
-
-
-
-
-
 class ProfilePersonality {
 	/**
 	 * id for the profile personality personality id; this is a foreign key
