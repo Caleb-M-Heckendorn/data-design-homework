@@ -1,0 +1,3 @@
+--INSERT Statements
+
+INSERT INTO personality(personalityId, personalityDescription, personalityName, personalityType) VALUES(unhex("24b70a023a9649aeab02709fa1153562"));

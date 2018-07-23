@@ -1,11 +1,10 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Caleb M. Heckendorn
- * Date: 7/19/2018
- * Time: 3:05 PM
- */
-/**
+namespace CalebMHeckendorn\DataDesignHomework;
+
+require_once("autoload.php");
+require_once(dirname(__DIR__, 2) . "../vendor/autoload.php");
+
+use Ramsey\Uuid\Uuid;/**
  * @author Caleb Heckendorn
  * @version 1.0
  */
