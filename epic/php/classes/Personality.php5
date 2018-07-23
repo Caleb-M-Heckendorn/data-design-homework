@@ -1,10 +1,8 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Caleb Heckendorn.
- * Date: 7/18/2018
- * Time: 8:40 AM
- */
+
+namespace Calebmheckendorn/data-design-homework;
+require_once(dirname(__DIR__, 2) . "/vendor/autoload.php");
+use "ramsey/uuid";
 /**
  * @author Caleb Heckendorn <checkendorn@cnm.edu>
  * @version 1.0
