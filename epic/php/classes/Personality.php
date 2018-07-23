@@ -1,8 +1,11 @@
 <?php
 
-namespace Calebmheckendorn/data-design-homework;
-require_once(dirname(__DIR__, 2) . "/vendor/autoload.php");
-use "ramsey/uuid";
+namespace CalebMHeckendorn\DataDesignHomework;
+
+require_once("autoload.php");
+require_once(dirname(__DIR__, 2) . "../vendor/autoload.php");
+
+use Ramsey\Uuid\Uuid;
 /**
  * @author Caleb Heckendorn <checkendorn@cnm.edu>
  * @version 1.0
