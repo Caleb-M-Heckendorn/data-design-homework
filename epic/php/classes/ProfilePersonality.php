@@ -100,7 +100,7 @@ class ProfilePersonality {
 		$parameters = ["profilePersonalityPersonalityId" => $this->profilePersonalityPersonalityId->getBytes(), "profilePersonalityProfileId" => $this->profilePersonalityProfileId->getBytes()];
 		$statement->execute($parameters);
 	}
-	/*
+	/**
 	 * delete the profile personality personality id from mySQL
 	 *
 	 * @param \PDO $pdo PDO connection object
@@ -116,9 +116,10 @@ class ProfilePersonality {
 		$statement->execute($parameters);
 	}
 	/*
+	 *
 	 * gets the ProfilePersonality by profile personality
 	 *
-	 * @param \PDO $pdo $pdo PDO connection object
+	 * @param \PDO $pdo PDO connection object
 	 * @param string $profileId profile id to search for
 	 * @return ProfilePersonality|null ProfilePersonality or null if not found
 	 * @throws \PDOException when mySQL errors happen
